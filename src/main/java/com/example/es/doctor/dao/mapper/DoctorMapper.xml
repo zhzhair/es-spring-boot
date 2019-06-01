@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.es.doctor.dao.mapper.DoctorMapper">
+    <select id="getDoctors" resultType="java.util.HashMap">
+        select doctor_id doctorId,
+            doctor_name doctorName,
+            doctor_title doctorTitle,
+            specialty,label,
+            doctor_des doctorDes,
+            hospital_id hospitalId,
+            hospital_name hospitalName
+        from doctor
+    </select>
+
+</mapper>

@@ -1,0 +1,38 @@
+spring.application.name: es
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/es?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    dbcp2:
+      initial-size: 100
+      max-total: 500
+      max-idle: 100
+      max-wait-millis: 5000
+      min-idle: 20
+      test-on-borrow: true
+      validation-query: SELECT 1
+      time-between-eviction-runs-millis: 300000
+      num-tests-per-eviction-run: 20
+  data:
+    elasticsearch: #单机本地测试用的话不要配置节点信息
+      repositories:
+        enabled: true
+      cluster-nodes: 127.0.0.1:9300
+
+server:
+  port: 80
+  tomcat:
+    uri-encoding: utf-8
+    max-threads: 1000
+    max-connections: 900
+    min-spare-threads: 100
+    accesslog:
+      pattern: '%{X-Forwarded-For}i %h %l %u %t "%r" %s %b %T'
+      enabled: true
+      directory: ${user.dir}/logs
+      prefix: access.${HOST:127.0.0.1}.${server.port:8080}
+
+logging.file: E:/u02/nginx/process
