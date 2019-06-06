@@ -1,0 +1,29 @@
+https://blog.csdn.net/u012270682/article/details/72934270
+
+下载路径：https://www.elastic.co/cn/downloads/elasticsearch#ga-release
+bin目录下双击elasticsearch.bat执行，完成后任意浏览器键入127.0.0.1:9200,出现下面界面，证明成功
+
+下载node：https://nodejs.org/en/download/ 
+安装完成用cmd进入安装目录执行 node -v可查看版本号
+在同一目录下执行 npm install -g grunt-cli命令，安装grunt完出现一堆黄字
+证明安装成功 用grunt -version查看版本号
+
+安装head
+修改elasticsearch.yml文件
+在文件最后加入
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: true
+node.data: true
+放开network.host: 192.168.0.1的注释并改为network.host: 0.0.0.0
+放开cluster.name；node.name；http.port的注释
+双击elasticsearch.bat重启es
+https://github.com/mobz/elasticsearch-head 下载zip文件
+解压到指定文件夹下，我的文件夹是E:\elasticsearch-5.4.1\elasticsearch-head-master\
+进入该文件夹，修改E:\elasticsearch-5.4.1\elasticsearch-head-master\Gruntfile.js
+在connect.server.options下添加hostname: '*'
+cmd进入E:\elasticsearch-5.4.1\elasticsearch-head-master文件夹
+执行 npm install
+安装完成执行grunt server 或者npm run start(以后每次)，出现下图证明安装成功，如果还不成功，
+退出es再执行一次npm install -g grunt-cli
+安装完成查看结果127.0.0.1:9100, 如果关闭了 下次再127.0.0.1:9100之前都要npm run start，才可正常启动head
