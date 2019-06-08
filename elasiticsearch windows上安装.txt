@@ -13,17 +13,20 @@ binÄ¿Â¼ÏÂË«»÷elasticsearch.batÖ´ĞĞ£¬Íê³ÉºóÈÎÒâä¯ÀÀÆ÷¼üÈë127.0.0.1:9200,³öÏÖÏÂÃæ½
 ÔÚÎÄ¼ş×îºó¼ÓÈë
 http.cors.enabled: true 
 http.cors.allow-origin: "*"
-node.master: true
+node.master: true    
 node.data: true
 ·Å¿ªnetwork.host: 192.168.0.1µÄ×¢ÊÍ²¢¸ÄÎªnetwork.host: 0.0.0.0
 ·Å¿ªcluster.name£»node.name£»http.portµÄ×¢ÊÍ
 Ë«»÷elasticsearch.batÖØÆôes
 https://github.com/mobz/elasticsearch-head ÏÂÔØzipÎÄ¼ş
-½âÑ¹µ½Ö¸¶¨ÎÄ¼ş¼ĞÏÂ£¬ÎÒµÄÎÄ¼ş¼ĞÊÇE:\elasticsearch-5.4.1\elasticsearch-head-master\
-½øÈë¸ÃÎÄ¼ş¼Ğ£¬ĞŞ¸ÄE:\elasticsearch-5.4.1\elasticsearch-head-master\Gruntfile.js
+½âÑ¹µ½Ö¸¶¨ÎÄ¼ş¼ĞÏÂ£¬ÎÒµÄÎÄ¼ş¼ĞÊÇD:\ELK\elasticsearch-head-master
+½øÈë¸ÃÎÄ¼ş¼Ğ£¬ĞŞ¸ÄD:\ELK\elasticsearch-head-master\Gruntfile.js
 ÔÚconnect.server.optionsÏÂÌí¼Óhostname: '*'
-cmd½øÈëE:\elasticsearch-5.4.1\elasticsearch-head-masterÎÄ¼ş¼Ğ
+cmd½øÈëD:\ELK\elasticsearch-head-masterÎÄ¼ş¼Ğ
 Ö´ĞĞ npm install
 °²×°Íê³ÉÖ´ĞĞgrunt server »òÕßnpm run start(ÒÔºóÃ¿´Î)£¬³öÏÖÏÂÍ¼Ö¤Ã÷°²×°³É¹¦£¬Èç¹û»¹²»³É¹¦£¬
 ÍË³öesÔÙÖ´ĞĞÒ»´Înpm install -g grunt-cli
 °²×°Íê³É²é¿´½á¹û127.0.0.1:9100, Èç¹û¹Ø±ÕÁË ÏÂ´ÎÔÙ127.0.0.1:9100Ö®Ç°¶¼Òªnpm run start£¬²Å¿ÉÕı³£Æô¶¯head
+
+É¾³ıË÷Òı£º
+curl -XDELETE -u elastic:changeme http://localhost:9200/acc-apply-2018.08.09,acc-apply-2018.08.10
