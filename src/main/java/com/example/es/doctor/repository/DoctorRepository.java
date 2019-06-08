@@ -11,5 +11,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  */
 public interface DoctorRepository extends ElasticsearchRepository<Doctor, Long> {
 
-    Page<Doctor> findByHospitalNameLikeOrDoctorNameLikeOrSpecialtyLikeOrLabelLike(String hospitalName,String doctorName,String specialty,String label, Pageable pageable);
+    Page<Doctor> findByHospitalNameLikeOrDoctorNameLike(String hospitalName,String doctorName,String specialty,String label, Pageable pageable);
 }

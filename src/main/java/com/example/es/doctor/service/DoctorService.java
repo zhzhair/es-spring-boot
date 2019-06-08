@@ -10,7 +10,8 @@ public interface DoctorService {
 
     void drop();
 
-    List<Doctor> findByHospitalNameLikeOrDoctorNameLikeOrSpecialtyLikeOrLabelLike(String hospitalName);
+    List<Doctor> findByHospitalNameLikeOrDoctorNameLike(String hospitalName);
 
     List<Doctor> searchDoctor(Integer pageNumber, Integer pageSize, String searchContent);
+
 }

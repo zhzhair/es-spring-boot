@@ -1,6 +1,8 @@
 package com.example.es.doctor.domain;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -10,13 +12,15 @@ public class Doctor implements Serializable {
     private static final long serialVersionUID = -1L;
 
     private Long id;
-    private String doctorId;
+    @Field(type = FieldType.Long)
+    private Long doctorId;
     private String doctorName;
     private String doctorTitle;
     private String specialty;
     private String label;
     private String doctorDes;
-    private String hospitalId;
+    @Field(type = FieldType.Long/*,fielddata = true*/)
+    private Long hospitalId;
     private String hospitalName;
 
     public Long getId() {
@@ -27,11 +31,11 @@ public class Doctor implements Serializable {
         this.id = id;
     }
 
-    public String getDoctorId() {
+    public Long getDoctorId() {
         return doctorId;
     }
 
-    public void setDoctorId(String doctorId) {
+    public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
     }
 
@@ -75,11 +79,11 @@ public class Doctor implements Serializable {
         this.doctorDes = doctorDes;
     }
 
-    public String getHospitalId() {
+    public Long getHospitalId() {
         return hospitalId;
     }
 
-    public void setHospitalId(String hospitalId) {
+    public void setHospitalId(Long hospitalId) {
         this.hospitalId = hospitalId;
     }
 

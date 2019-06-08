@@ -43,13 +43,13 @@ public class DoctorServiceImpl implements DoctorService {
         HashMap<String,Object> map = list.get((int)i);
         Doctor doctor = new Doctor();
         doctor.setId(i);
-        doctor.setDoctorId(map.get("doctorId").toString());
+        doctor.setDoctorId(Long.valueOf(map.get("doctorId").toString()));
         doctor.setDoctorName(map.get("doctorName").toString());
         doctor.setDoctorTitle(map.get("doctorTitle").toString());
         doctor.setDoctorDes(map.get("doctorDes").toString());
         doctor.setSpecialty(map.get("specialty").toString());
         doctor.setLabel(map.get("label").toString());
-        doctor.setHospitalId(map.get("hospitalId").toString());
+        doctor.setHospitalId(Long.valueOf(map.get("hospitalId").toString()));
         doctor.setHospitalName(map.get("hospitalName").toString());
         doctorRepository.save(doctor);
     }
@@ -60,8 +60,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<Doctor> findByHospitalNameLikeOrDoctorNameLikeOrSpecialtyLikeOrLabelLike(String hospitalName) {
-        return doctorRepository.findByHospitalNameLikeOrDoctorNameLikeOrSpecialtyLikeOrLabelLike(hospitalName,hospitalName,hospitalName,hospitalName,pageable).getContent();
+    public List<Doctor> findByHospitalNameLikeOrDoctorNameLike(String hospitalName) {
+        return doctorRepository.findByHospitalNameLikeOrDoctorNameLike(hospitalName,hospitalName,hospitalName,hospitalName,pageable).getContent();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class DoctorServiceImpl implements DoctorService {
         //   - 由于无相关性的分值默认为 1 ，设置权重分最小值为 10
         //搜索全部文档
 //        QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
-        QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(searchContent,"specialty", "label", "doctorName", "hospitalName");
+        QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(searchContent,"doctorName", "hospitalName");
 //        QueryBuilders.rangeQuery("age").gt(30);
 //        QueryBuilder queryBuilder = QueryBuilders.wildcardQuery("name", "*" + searchContent + "*");
 //        QueryBuilder queryBuilder1 = QueryBuilders.wildcardQuery("name", "*" + searchContent + "*");
@@ -115,9 +115,6 @@ public class DoctorServiceImpl implements DoctorService {
 //        boolQueryBuilder.should(queryBuilder1).should(queryBuilder2);
 //        QueryBuilder queryBuilder = QueryBuilders.matchPhraseQuery("name", searchContent);
 
-//        FieldSortBuilder sort = SortBuilders.fieldSort("doctorId").order(SortOrder.DESC);
-//        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
-//        nativeSearchQueryBuilder.withQuery(boolQueryBuilder).withSort(sort);
         ScoreFunctionBuilder scoreFunctionBuilder = ScoreFunctionBuilders.weightFactorFunction(999.0f);
         FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(queryBuilder,scoreFunctionBuilder)
                 .scoreMode(FunctionScoreQuery.ScoreMode.SUM).setMinScore(100.0f);
@@ -128,35 +125,4 @@ public class DoctorServiceImpl implements DoctorService {
                 .withQuery(functionScoreQueryBuilder).build();
     }
 
-//    private void test(){
-//            （1）统计某个字段的数量
-//        ValueCountBuilder vcb=  AggregationBuilders.count("count_uid").field("uid");
-//（2）去重统计某个字段的数量（有少量误差）
-//        CardinalityBuilder cb= AggregationBuilders.cardinality("distinct_count_uid").field("uid");
-//（3）聚合过滤
-//        FilterAggregationBuilder fab= AggregationBuilders.filter("uid_filter").filter(QueryBuilders.queryStringQuery("uid:001"));
-//（4）按某个字段分组
-//        TermsBuilder tb=  AggregationBuilders.terms("group_name").field("name");
-//（5）求和
-//        SumBuilder  sumBuilder=	AggregationBuilders.sum("sum_price").field("price");
-//（6）求平均
-//        AvgBuilder ab= AggregationBuilders.avg("avg_price").field("price");
-//（7）求最大值
-//        MaxBuilder mb= AggregationBuilders.max("max_price").field("price");
-//（8）求最小值
-//        MinBuilder min=	AggregationBuilders.min("min_price").field("price");
-//（9）按日期间隔分组
-//        DateHistogramBuilder dhb= AggregationBuilders.dateHistogram("dh").field("date");
-//（10）获取聚合里面的结果
-//        TopHitsBuilder thb=  AggregationBuilders.topHits("top_result");
-//（11）嵌套的聚合
-//        NestedBuilder nb= AggregationBuilders.nested("negsted_path").path("quests");
-//（12）反转嵌套
-//        AggregationBuilders.reverseNested("res_negsted").path("kps ");
-        /*---------------------
-                作者：像雾像雨又像风_
-        来源：CSDN
-        原文：https://blog.csdn.net/topdandan/article/details/81436141
-        版权声明：本文为博主原创文章，转载请附上博文链接！*/
-//    }
 }
